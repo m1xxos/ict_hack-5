@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "ALS Horizont";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../../fonts/ALS_Gorizont_Variable.ttf") format("truetype")
+}
+
+@font-face {
+  font-family: "Golos-Text";
+  font-style: normal;
+  font-weight: 600;
+  src: url("../../fonts/Golos-UI_VF.ttf") format("truetype")
+}
+
+:root {
+    --font-family: "Golos-Text";
+  }
+  
+  * {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      outline: none;
+      font-family: var(--font-family);
+      box-sizing: border-box;
+    }
+    
+    html {
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+      height: 100%;
+    }
+    
+    body {
+      height: 100%;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+      color: #2c3837;
+      background-image: -webkit-linear-gradient(top, rgb(0,0,0), #3B3B3B);
+    }
+  
+    h2 {
+      line-height: 28px;
+    }
+  
+    #root {
+      height: 100%;
+    }
