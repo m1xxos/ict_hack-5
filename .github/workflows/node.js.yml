@@ -26,4 +26,4 @@ jobs:
       env:
         CI: false
     - run: sudo rm -rf /usr/share/nginx/html/
-    - run: sudo mv /home/ubuntu/actions-runner-front/_work/amongpartsfront/ict_hack-5/build /usr/share/nginx/html
+    - run: sudo mv /home/ubuntu/actions-runner/_work/ict_hack-5/ict_hack-5/build /usr/share/nginx/html
