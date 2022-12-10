@@ -17,7 +17,7 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 Base: DeclarativeMeta = declarative_base()
 
 
-class Student(SQLAlchemyBaseUserTableUUID, Base):
+class User(SQLAlchemyBaseUserTableUUID, Base):
     name: str = Column(String(length=50), nullable=False)
     middlename: str = Column(String(length=50), nullable=True)
     surname: str = Column(String(length=50), nullable=False)
@@ -26,7 +26,7 @@ class Student(SQLAlchemyBaseUserTableUUID, Base):
     verified: bool = Column(Boolean, default=False, nullable=False)
 
 
-engine = create_async_engine(DATABASE_URL)
+engine = create_async_engine(DATABASE_URL, echo=True)
 async_session_maker = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 
 
@@ -41,4 +41,4 @@ async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
 
 
 async def get_user_db(session: AsyncSession = Depends(get_async_session)):
-    yield SQLAlchemyUserDatabase(session, Student)
+    yield SQLAlchemyUserDatabase(session, User)
