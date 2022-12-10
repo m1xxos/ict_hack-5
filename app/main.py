@@ -1,6 +1,7 @@
 from fastapi import Depends, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-from app.users.db import User, create_db_and_tables
+from app.users.db import Student, create_db_and_tables
 from app.users.schemas import UserCreate, UserRead, UserUpdate
 from app.users.users import auth_backend, current_active_user, fastapi_users
 from dotenv import load_dotenv
@@ -9,6 +10,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "https://api.icthack.ga"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 app.include_router(
@@ -37,7 +46,7 @@ app.include_router(
 
 
 @app.get("/authenticated-route")
-async def authenticated_route(user: User = Depends(current_active_user)):
+async def authenticated_route(user: Student = Depends(current_active_user)):
     return {"message": f"Hello {user.email}!"}
 
 
