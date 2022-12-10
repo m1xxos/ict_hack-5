@@ -1,44 +1,34 @@
 import os
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, func, select
-from typing import AsyncGenerator, Optional
+from typing import Optional
 
+import certifi as certifi
+import motor.motor_asyncio
+from beanie import PydanticObjectId
 from dotenv import load_dotenv
-from fastapi import Depends
-from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
-from sqlalchemy import Column
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
-from sqlalchemy.orm import sessionmaker
-
+from fastapi_users.db import BeanieBaseUser, BeanieUserDatabase
 
 load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
-Base: DeclarativeMeta = declarative_base()
+client = motor.motor_asyncio.AsyncIOMotorClient(
+    DATABASE_URL, uuidRepresentation="standard", tlsCAFile=certifi.where()
+)
+db = client["ict"]
 
 
-class User(SQLAlchemyBaseUserTableUUID, Base):
-    name: str = Column(String(length=50), nullable=False)
-    middlename: str = Column(String(length=50), nullable=True)
-    surname: str = Column(String(length=50), nullable=False)
-    image: str = Column(String(length=100), nullable=False)
-    phone: str = Column(String(length=20), nullable=False)
-    verified: bool = Column(Boolean, default=False, nullable=False)
+class User(BeanieBaseUser[PydanticObjectId]):
+    interest_list: list[str] = []
+    tag_list: list[str] = []
+    name: str
+    surname: str
+    middle_name: Optional[str] = None
+    image: Optional[str] = None
+    phone: Optional[str]
+    education: Optional[str] = None
+    project_list: list[str] = []
+    cv: Optional[str] = None
+    skills: list[str] = []
 
 
-engine = create_async_engine(DATABASE_URL, echo=True)
-async_session_maker = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
-
-
-async def create_db_and_tables():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-
-
-async def get_async_session() -> AsyncGenerator[AsyncSession, None]:
-    async with async_session_maker() as session:
-        yield session
-
-
-async def get_user_db(session: AsyncSession = Depends(get_async_session)):
-    yield SQLAlchemyUserDatabase(session, User)
+async def get_user_db():
+    yield BeanieUserDatabase(User)

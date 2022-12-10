@@ -1,13 +1,21 @@
+from beanie import init_beanie
 from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.users.db import User, create_db_and_tables
+from app.users.db import User, db
 from app.users.schemas import UserCreate, UserRead, UserUpdate
 from app.users.users import auth_backend, current_active_user, fastapi_users
+from app.database import *
+from app.models import *
 from dotenv import load_dotenv
 
 
 load_dotenv()
+
+DEFAULT_LIMIT = 10
+DEFAULT_SKIP = 0
+
+tags = db.tags
 
 app = FastAPI()
 
@@ -50,12 +58,26 @@ async def authenticated_route(user: User = Depends(current_active_user)):
     return {"message": f"Hello {user.email}!"}
 
 
-@app.get("/test")
-async def test():
-    await create_db_and_tables()
+@app.get("/tags")
+async def get_tags(limit: int = DEFAULT_LIMIT, skip: int = DEFAULT_SKIP):
+    return await fetch_all(limit, skip, tags, Tags)
+
+
+@app.get("/tags/{tag_id}")
+async def get_tag(tag_id: str):
+    return await fetch_one(tag_id, tags, Tags)
+
+
+@app.post("/tags")
+async def create_tag(tag: Tags):
+    return await create_one(dict(tag), tags)
 
 
 @app.on_event("startup")
 async def on_startup():
-    # Not needed if you setup a migration system like Alembic
-    await create_db_and_tables()
+    await init_beanie(
+        database=db,
+        document_models=[
+            User,
+        ],
+    )
