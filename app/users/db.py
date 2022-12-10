@@ -1,12 +1,17 @@
+import os
 from typing import AsyncGenerator
 
+from dotenv import load_dotenv
 from fastapi import Depends
 from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
 from sqlalchemy.orm import sessionmaker
 
-DATABASE_URL = "sqlite+aiosqlite:///./test.db"
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
 Base: DeclarativeMeta = declarative_base()
 
 
