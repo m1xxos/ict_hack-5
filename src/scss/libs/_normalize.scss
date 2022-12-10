@@ -1,19 +1,24 @@
 @font-face {
-  font-family: "ALS Horizont";
+  font-family: "ALS Gorizont";
   font-style: normal;
   font-weight: 400;
   src: url("../../fonts/ALS_Gorizont_Variable.ttf") format("truetype")
 }
 
 @font-face {
-  font-family: "Golos-Text";
+  font-family: "Golos-UI";
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   src: url("../../fonts/Golos-UI_VF.ttf") format("truetype")
 }
 
 :root {
-    --font-family: "Golos-Text";
+    width: 1240px;
+    margin: auto;
+    font-family: 'ALS Gorizont';
+    @media (max-width: 1240px) {
+      width: 100%;
+    }
   }
   
   * {
@@ -21,7 +26,7 @@
       margin: 0;
       list-style: none;
       outline: none;
-      font-family: var(--font-family);
+      font-family: 'ALS Gorizont';
       box-sizing: border-box;
     }
     

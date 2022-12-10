@@ -1,0 +1,26 @@
+.input {
+    box-sizing: border-box;
+
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+gap: 10px;
+
+height: 65px;
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+
+background-color: transparent;
+border-radius: 20px;
+border: 1px solid #c6c6c6;
+
+font-size: 20px;
+color: #ffffff;
+
+text-align: center;
+}

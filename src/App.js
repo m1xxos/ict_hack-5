@@ -10,11 +10,10 @@ import './scss/app.scss'
 function App() {
   return (
     <div className="App">
-      <Header/>
       <Routes>
         <Route path="*" element={<></>} />
         <Route path="login" element={<LoginPage/>} />
-        <Route path="registration" element={<RegistrationPage/>} />
+        <Route path="registration" element={<RegistrationPage/>}/>
         <Route path="projects" element={<ProjectsPage/>} />
         <Route path="startups" element={<StartupsPage/>} />
         <Route path="recruiting" element={<RecruitingPage/>} />
