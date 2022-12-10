@@ -5,14 +5,35 @@ import api from "../../axios/axios";
 import Header from "../Header";
 import FirstStep from "./firstStep";
 import { Route, Routes } from "react-router-dom";
-import SecondStep from "./secondStep";
+import SecondStudentStep from "./secondStudentStep";
+import ThirdStudentStep from "./thirdStudentStep";
 
 function RegistrationPage () {
-    let [step, setStep] = useState(0)
-    console.log(step)
-    return(<div className={styles.main}>
+    const [step, setStep] = useState(0)
+    const [type, setType] = useState(undefined)
+    const [studentData, setStudentData] = useState({
+        name: "",
+        middlename: "",
+        surname: "",
+        email: "",
+        phone: "",
+        password: "",
+        passwordConfirm: ""
+      });
+
+
+      function RenderStep(type, step) {
+        if (type === "student"){
+            return (step === 1 ? <SecondStudentStep studentData={studentData} setStudentData={setStudentData} setStep={setStep}/> : <ThirdStudentStep/>)
+        }
+        else {
+
+        }
+      }
+    return(
+    <div className={styles.main}>
         <Header/>  
-        { step === 0 ? <FirstStep setStep={setStep}/> : <SecondStep setStep={setStep}/>}
+        {!type || step === 0 ? <FirstStep setStep={setStep} setType={setType}/> : RenderStep(type, step)}
     </div>)
 }
 
