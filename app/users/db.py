@@ -19,7 +19,7 @@ Base: DeclarativeMeta = declarative_base()
 
 class Student(SQLAlchemyBaseUserTableUUID, Base):
     name: str = Column(String(length=50), nullable=False)
-    middle_name: str = Column(String(length=50), nullable=True)
+    middlename: str = Column(String(length=50), nullable=True)
     surname: str = Column(String(length=50), nullable=False)
     image: str = Column(String(length=100), nullable=False)
     phone: str = Column(String(length=20), nullable=False)
