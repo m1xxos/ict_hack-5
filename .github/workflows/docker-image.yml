@@ -1,0 +1,37 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "back" ]
+  pull_request:
+    branches: [ "back" ]
+
+jobs:
+
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+    
+    - name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: m1xxos/icthack:latest
+    
+    - name: Run docker image
+      run: |
+        docker rm -f api
+        docker pull m1xxos/icthack
+        docker run -d --name api -p 8564:80 --env-file /home/ubuntu/envkek m1xxos/icthack
