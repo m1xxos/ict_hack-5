@@ -1,0 +1,39 @@
+.main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 82px 82px;
+  gap: 0px 0px;
+  grid-template-areas:
+    "A . C"
+    ". B .";
+}
+
+.itmo {
+    padding-left: 15px;
+    color: #FFFFFF;
+    grid-area: A;
+    font-weight: 700;
+    font-size: 60px;
+}
+
+.steps {
+    grid-area: B;
+    display: flex;
+    flex-direction: row;
+    font-weight: 700;
+    font-size: 70px;
+    color: #C9C9C9;
+    justify-content: space-between;
+}
+
+.registration {
+    text-align: right;
+    padding-right: 15px;
+    font-family: 'Golos-UI';
+    padding-left: 15px;
+    color: #FFFFFF;
+    grid-area: C;
+    font-weight: 700;
+    line-height: 60px;
+    font-size: 50px;
+}

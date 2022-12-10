@@ -1,0 +1,59 @@
+.main {
+    display: grid; 
+    height: 100%;
+    grid-template-columns: 1fr; 
+    grid-template-rows: 163px 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "."
+      ".";
+      //чисто для коммита
+}
+
+.first_step {
+  display: flex;
+  gap: 30px;
+  height: 100%;
+  flex-direction: column;
+  justify-content: start;
+  width: 580px;
+  margin: 0 auto;
+}
+
+.role {
+  height: 88px;
+  width: 100%;
+  background: rgba(149, 128, 255, 0.76);
+  border-radius: 20px;
+  font-size: 30px;
+  color: #FFFFFF;
+  transition: 0.1s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+    background: rgba(149, 128, 255, 1.0);
+  }
+}
+
+.title {
+  margin: 40px auto 0 auto;
+  color: #FFFFFF;
+  font-size: 40px;
+}
+
+.container {
+  display: grid; 
+  grid-template-columns: 1fr 580px 1fr; 
+  grid-template-rows: 1fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    ". B ."; 
+
+  .form {
+    grid-area: B;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+}
