@@ -34,4 +34,4 @@ jobs:
       run: |
         docker rm -f api
         docker pull m1xxos/icthack
-        docker run -d --name api -p 8564:80 --env-file /home/ubuntu/envkek m1xxos/icthack
+        docker run -d --name api -p 8564:80 --env-file /home/ubuntu/kekenv.env m1xxos/icthack
