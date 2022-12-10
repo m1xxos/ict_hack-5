@@ -1,9 +1,11 @@
 import os
-from typing import AsyncGenerator
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, func, select
+from typing import AsyncGenerator, Optional
 
 from dotenv import load_dotenv
 from fastapi import Depends
 from fastapi_users.db import SQLAlchemyBaseUserTableUUID, SQLAlchemyUserDatabase
+from sqlalchemy import Column
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.ext.declarative import DeclarativeMeta, declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -16,7 +18,12 @@ Base: DeclarativeMeta = declarative_base()
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
-    pass
+    name: str = Column(String(length=50), nullable=False)
+    middle_name: str = Column(String(length=50), nullable=True)
+    surname: str = Column(String(length=50), nullable=False)
+    image: str = Column(String(length=100), nullable=False)
+    phone: str = Column(String(length=20), nullable=False)
+    verified: bool = Column(Boolean, default=False, nullable=False)
 
 
 engine = create_async_engine(DATABASE_URL)
