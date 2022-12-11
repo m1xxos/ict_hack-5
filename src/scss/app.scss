@@ -3,3 +3,71 @@
 .App {
     height: 100%;
 }
+
+.student{
+    display: flex;
+    margin-top: 30px;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.areaC{
+    grid-area: C;
+}
+
+.areaB{
+    grid-area: B;
+}
+
+
+.left_panel{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+    "A A"
+    "B C";
+}
+
+.student_card {
+
+}
+
+.student_image{
+    width: 220px;
+    height: 220px;
+}
+.student_name{
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.right_panel{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.input_search{
+    grid-area: A;
+    width: 500px;
+    height: 50px;
+}
+ .input_radio{
+     font-size: 25px;
+     color: #FFFFFF;
+ }
+
+.input_radio input[type=radio]{
+    width: 35px;
+    height: 35px;
+    font-size: 25px;
+}
+
+.students_header{
+    text-align: center;
+    font-size: 40px;
+    font-weight: 800;
+    color: #FFFFFF;
+}

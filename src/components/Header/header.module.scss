@@ -1,0 +1,23 @@
+.lkButton {
+    color: #FFFFFF;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: 'ALS Gorizont';
+    font-size: 40px;
+}
+
+.header_title{
+    cursor: pointer;
+    font-size: 25px;
+    line-height: 50px;
+    font-weight: 700;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    gap: 82px;
+    justify-content: space-between;
+    padding-top: 20px;
+    color: #FFFFFF;
+}

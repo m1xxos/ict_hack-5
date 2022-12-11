@@ -1,24 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import Header from "../Header";
 import ItmoButton from "../ItmoButton";
 import LoginPopup from "../LoginPopup";
 import styles from './homePage.module.scss'
 
-function HomePage() {
+function HomePage({popupHidden, setPopupHidden}) {
     const navigate = useNavigate()
-    const [popupHidden, setPopupHidden] = useState(true)
 
     return (
         <>
-        <LoginPopup hidden={popupHidden} setPopupHidden={setPopupHidden}/>
         <div>
-            <div class={styles.header}>
-                <ItmoButton onClick={() => navigate('/')}/>
-                <div className={styles.header_title} onClick={() => navigate('/students')}>[СТУДЕНТЫ]</div>
-                <div className={styles.header_title} onClick={() => navigate('/projects')}>[ПРОЕКТЫ]</div>
-                <div className={styles.header_title} onClick={() => navigate('/burse')}>[БИРЖА]</div>
-                <button className={styles.lkButton} onClick={() => {setPopupHidden(!popupHidden)}}>Войти в ЛК</button>
-            </div>
+            <Header popupHidden={popupHidden} setPopupHidden={setPopupHidden}/>
             <div className={styles.container_slider_css}>
                 <img className={styles.photo_slider_css} src="assets/firstt.png" alt="" />
                 <img className={styles.photo_slider_css} src="assets/first.png" alt="" />
