@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 import styles from './registrationPage.module.scss'
 import api from "../../axios/axios";
-import Header from "../Header";
+import RegistrationHeader from "../RegistrationHeader";
 import FirstStep from "./firstStep";
 import { Route, Routes } from "react-router-dom";
 import SecondStudentStep from "./secondStudentStep";
@@ -49,7 +49,7 @@ function RegistrationPage () {
 
       function RenderStep(type, step) {
         if (type === "student"){
-            return (step === 1 ? <SecondStudentStep studentData={studentData} setStudentData={setStudentData} setStep={setStep}/> : <ThirdStudentStep setStep={setStep} studentAdditionalData={studentAdditionalData} setStudentAdditionalData={setStudentAdditionalData}/>)
+            return (step === 1 ? <SecondStudentStep studentData={studentData} setStudentData={setStudentData} setStep={setStep}/> : <ThirdStudentStep setStep={setStep} studentData={studentData} studentAdditionalData={studentAdditionalData} setStudentAdditionalData={setStudentAdditionalData}/>)
         }
         else {
             return (step === 1 ? <SecondCompanyStep companyData={companyData} setCompanyData={setCompanyData} setStep={setStep}/> : step === 2 ? <ThirdCompanyStep setStep={setStep} companyAdditionalData={companyAdditionalData} setCompanyAdditionalData={setCompanyAdditionalData}/> : <FourthCompanyStep setStep={setStep} confidantData={confidantData} setConfidantData={setConfidantData}/>)
@@ -57,7 +57,7 @@ function RegistrationPage () {
       }
     return(
     <div className={styles.main}>
-        <Header stepNumber={stepNumber}/>  
+        <RegistrationHeader stepNumber={stepNumber}/>  
         {!type || step === 0 ? <FirstStep setStep={setStep} setType={setType} setStepNumber={setStepNumber}/> : RenderStep(type, step)}
     </div>)
 }

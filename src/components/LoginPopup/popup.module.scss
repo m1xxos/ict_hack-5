@@ -1,0 +1,42 @@
+.main {
+    z-index: 100000000;
+    position: absolute;
+    height: 415px;
+    width: 722px;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: rgba(59, 59, 59, 0.57);
+    backdrop-filter: blur(25px);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column; 
+    text-align: center;
+    padding: 20px;
+    gap: 10px;
+
+    h1 {
+        color: #FFFFFF;
+        font-size: 40px;
+    }
+
+}
+
+.loginButton {
+    height: 88px;
+  width: 100%;
+  background: rgba(64, 62, 73, 0.76);
+  border: none;
+  border-radius: 20px;
+  font-size: 30px;
+  color: #FFFFFF;
+  transition: 0.1s;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+    background: rgba(149, 128, 255, 1.0);
+  }
+}

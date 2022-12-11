@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
+import HomePage from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import ProjectsPage from './components/ProjectsPage';
 import RecruitingPage from './components/RecruitingPage';
@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="*" element={<></>} />
+        <Route path="*" element={<HomePage/>} />
         <Route path="login" element={<LoginPage/>} />
         <Route path="registration" element={<RegistrationPage/>}/>
         <Route path="projects" element={<ProjectsPage/>} />

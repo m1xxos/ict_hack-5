@@ -14,18 +14,6 @@ function SecondStudentStep({studentData, setStudentData, setStep}) {
     setStudentData(newData);
   }
 
-  function register(e) {
-    e.preventDefault();
-    if (studentData.password !== studentData.passwordConfirm){
-      alert('Не совпадают пароль и повторно введенный он же')
-      return
-    }
-
-    const res = api.register(studentData);
-
-    setStep(2)
-  }
-
   return (
     <div className={styles.container}>
       <div className={styles.form}>
@@ -78,7 +66,7 @@ function SecondStudentStep({studentData, setStudentData, setStep}) {
         />
       </div>
       <Arrow onClick={() => setStep(0)} back/>
-      <Arrow onClick={register}/>
+      <Arrow onClick={() => setStep(2)}/>
     </div>
   );
 }

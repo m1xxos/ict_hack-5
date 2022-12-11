@@ -10,11 +10,16 @@ export default class api {
     static async register({name, middlename, surname, email, phone, password}) {
         console.log({name, middlename, surname, email, phone, password})
         const response = await axios.post('https://api.ictkek.ga/auth/register', {name, middlename, surname, email, phone, password})
-        console.log(response)
+        return response
     }
 
-    static async login(email, password) {
-        const response = await axios.post('api.ictkek.ga', {email, password})
+    static async login(username, password) {
+        const response = await axios.post('https://api.ictkek.ga/auth/jwt/login', {username, password})
         return response
+    }
+
+    static async pathStudent({interests, skills}) {
+        const response = await axios.post('https://api.ictkek.ga/auth/register', {})
+
     }
 }
