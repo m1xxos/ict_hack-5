@@ -17,7 +17,7 @@ db = client["ict"]
 
 
 class User(BeanieBaseUser[PydanticObjectId]):
-    interest_list: list[str] = []
+    interests: Optional[str] = None
     tag_list: list[str] = []
     name: str
     surname: str
