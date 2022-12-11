@@ -60,16 +60,16 @@ async def authenticated_route(user: User = Depends(current_active_user)):
 
 @app.get("/tags")
 async def get_tags(limit: int = DEFAULT_LIMIT, skip: int = DEFAULT_SKIP):
-    return await fetch_all(limit, skip, tags, Tags)
+    return await fetch_all(limit, skip, tags, Tag)
 
 
 @app.get("/tags/{tag_id}")
 async def get_tag(tag_id: str):
-    return await fetch_one(tag_id, tags, Tags)
+    return await fetch_one(tag_id, tags, Tag)
 
 
 @app.post("/tags")
-async def create_tag(tag: Tags):
+async def create_tag(tag: Tag):
     return await create_one(dict(tag), tags)
 
 
