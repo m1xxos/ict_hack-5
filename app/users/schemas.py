@@ -5,7 +5,7 @@ from fastapi_users import schemas
 
 
 class UserRead(schemas.BaseUser[PydanticObjectId]):
-    interest_list: list[str]
+    interests: str
     tag_list: list[str]
     name: str
     surname: str
@@ -26,7 +26,7 @@ class UserCreate(schemas.BaseUserCreate):
 
 
 class UserUpdate(schemas.BaseUserUpdate):
-    interest_list: Optional[list[str]]
+    interests: str
     tag_list: Optional[list[str]]
     name: Optional[str]
     surname: Optional[str]
