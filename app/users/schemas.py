@@ -21,7 +21,7 @@ class UserRead(schemas.BaseUser[PydanticObjectId]):
 class UserCreate(schemas.BaseUserCreate):
     name: str
     surname: str
-    middle_name: str
+    middlename: Optional[str]
     phone: str
 
 

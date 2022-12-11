@@ -1,6 +1,12 @@
+import os
+import boto3
+from tempfile import NamedTemporaryFile
+
 from beanie import init_beanie
-from fastapi import Depends, FastAPI
+from fastapi import Depends, FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from loguru import logger
+from botocore.exceptions import ClientError
 
 from app.users.db import User, db
 from app.users.schemas import UserCreate, UserRead, UserUpdate
@@ -14,6 +20,7 @@ load_dotenv()
 
 DEFAULT_LIMIT = 10
 DEFAULT_SKIP = 0
+UPLOAD = True
 
 tags = db.tags
 
@@ -21,7 +28,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "https://api.icthack.ga"],
+    allow_origins=["http://localhost:3000", "https://api.ictkek.ga", "https://ictkek.ga"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -72,6 +79,18 @@ async def get_tag(tag_id: str):
 async def create_tag(tag: Tag):
     return await create_one(dict(tag), tags)
 
+
+@app.post("/")
+async def upload(file: UploadFile = File(...)):
+    if UPLOAD:
+        # Upload the file
+        s3_client = boto3.client("s3", endpoint_url="http://localstack:4566")
+        try:
+            s3_client.upload_fileobj(file.file, "local", "myfile.txt")
+        except ClientError as e:
+            logger.error(e)
+    contents = await file.read()
+    return {"message": "Success!"}
 
 @app.on_event("startup")
 async def on_startup():

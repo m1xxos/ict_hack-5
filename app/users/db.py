@@ -21,7 +21,7 @@ class User(BeanieBaseUser[PydanticObjectId]):
     tag_list: list[str] = []
     name: str
     surname: str
-    middle_name: Optional[str] = None
+    middlename: Optional[str] = None
     image: Optional[str] = None
     phone: Optional[str]
     education: Optional[str] = None
