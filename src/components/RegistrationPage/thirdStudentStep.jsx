@@ -1,4 +1,5 @@
-import React, { useRef, useState, useNavigate } from "react";
+import React, { useRef, useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import { useCookies } from "react-cookie";
 import api from "../../axios/axios";
 import Arrow from "../Arrow";
@@ -6,7 +7,7 @@ import TextInput from "../UI/TextInput";
 import styles from "./registrationPage.module.scss";
 
 function ThirdStudentStep({ setStep, studentData, studentAdditionalData, setStudentAdditionalData }) {
-  const navigate = useNavigate
+  const navigate = useNavigate()
   let textInputRef = useRef();
   const [skillInput, setSkillInput] = useState(false)
   const [newSkill, setNewSkill] = useState("")
