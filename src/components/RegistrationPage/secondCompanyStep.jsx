@@ -5,23 +5,23 @@ import Arrow from "../Arrow";
 import TextInput from "../UI/TextInput";
 import styles from "./registrationPage.module.scss";
 
-function SecondStudentStep({studentData, setStudentData, setStep}) {
+function SecondCompanyStep({companyData, setCompanyData, setStep}) {
   const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
 
   function handle(e) {
-    let newData = { ...studentData };
+    let newData = { ...companyData };
     newData[e.target.id] = e.target.value;
-    setStudentData(newData);
+    setCompanyData(newData);
   }
 
   function register(e) {
     e.preventDefault();
-    if (studentData.password !== studentData.passwordConfirm){
+    if (companyData.password !== companyData.passwordConfirm){
       alert('Не совпадают пароль и повторно введенный он же')
       return
     }
 
-    const res = api.register(studentData);
+    const res = api.register(companyData);
 
     setStep(2)
   }
@@ -30,49 +30,35 @@ function SecondStudentStep({studentData, setStudentData, setStep}) {
     <div className={styles.container}>
       <div className={styles.form}>
         <TextInput
-          id="surname"
-          placeholder="фамилия"
-          value={studentData.surname}
+          id="title"
+          placeholder="название"
+          value={companyData.title}
           onChange={(e) => handle(e)}
         />
         <TextInput
-          id="name"
-          placeholder="имя"
-          value={studentData.name}
-          onChange={(e) => handle(e)}
-        />
-        <TextInput
-          id="middlename"
-          placeholder="отчество"
-          value={studentData.middlename}
+          id="INN"
+          placeholder="ИНН"
+          value={companyData.INN}
           onChange={(e) => handle(e)}
         />
         <TextInput
           id="email"
           placeholder="email"
           type = "email"
-          value={studentData.email}
-          onChange={(e) => handle(e)}
-        />
-        <TextInput
-          id="phone"
-          placeholder="телефон"
-          value={studentData.phone}
-          type = "tel"
-          mask="+7\(999) 999 99 99"
+          value={companyData.email}
           onChange={(e) => handle(e)}
         />
         <TextInput
           id="password"
           placeholder="пароль"
-          value={studentData.password}
+          value={companyData.password}
           type = "password"
           onChange={(e) => handle(e)}
         />
         <TextInput
           id="passwordConfirm"
           placeholder="повторите пароль"
-          value={studentData.passwordConfirm}
+          value={companyData.passwordConfirm}
           type = "password"
           onChange={(e) => handle(e)}
         />
@@ -83,4 +69,4 @@ function SecondStudentStep({studentData, setStudentData, setStep}) {
   );
 }
 
-export default SecondStudentStep;
+export default SecondCompanyStep;

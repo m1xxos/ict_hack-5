@@ -5,15 +5,15 @@ import Arrow from "../Arrow";
 import TextInput from "../UI/TextInput";
 import styles from "./registrationPage.module.scss";
 
-function ThirdStudentStep({setStep, studentAdditionalData, setStudentAdditionalData}) {
+function ThirdCompanyStep({setStep, companyAdditionalData, setCompanyAdditionalData}) {
     let textInputRef = useRef();
     const [skillInput, setSkillInput] = useState(false)
     const [newSkill, setNewSkill] = useState("")
 
   function handle(e) {
-    let newData = { ...studentAdditionalData };
+    let newData = { ...companyAdditionalData };
     newData[e.target.id] = e.target.value;
-    setStudentAdditionalData(newData);
+    setCompanyAdditionalData(newData);
   }
 
   function handleSkill(e) {
@@ -25,20 +25,20 @@ function ThirdStudentStep({setStep, studentAdditionalData, setStudentAdditionalD
   function addSkill(e = false) {
     if (e && e.keyCode !== 13) return
     if (newSkill === "") return
-    let newStudentAdditionalData = {...studentAdditionalData}
+    let newStudentAdditionalData = {...companyAdditionalData}
     if (newStudentAdditionalData.skills.indexOf(newSkill) === -1) {
         newStudentAdditionalData.skills.push(newSkill)
-        setStudentAdditionalData(newStudentAdditionalData)
+        setCompanyAdditionalData(newStudentAdditionalData)
         setNewSkill("")
     }
     else alert('уже есть такое еп та')
   }
 
   function removeSkill (data) {
-    let newStudentAdditionalData = {...studentAdditionalData}
+    let newStudentAdditionalData = {...companyAdditionalData}
     const id = newStudentAdditionalData.skills.indexOf(data)
     if (id !== -1) newStudentAdditionalData.skills.splice(id, 1)
-    setStudentAdditionalData(newStudentAdditionalData)
+    setCompanyAdditionalData(newStudentAdditionalData)
   }
 
   function postAdditionalData(e) {
@@ -53,14 +53,14 @@ function ThirdStudentStep({setStep, studentAdditionalData, setStudentAdditionalD
       <div className={styles.form}>
         <textarea
         id="interests"
-          placeholder="расскажите об интересах.."
-          value={studentAdditionalData.interests}
+          placeholder="расскажите о деятельности компании..."
+          value={companyAdditionalData.interests}
           onChange={(e) => handle(e)}
         />
-        <h1>ключевые навыки:</h1>
+        <h1>ключевые направления работы:</h1>
         {
-        studentAdditionalData.skills &&
-        studentAdditionalData.skills.map((data, index) => <button className={styles.role} key={index} onClick={() => removeSkill(data)}>{data}</button>)
+        companyAdditionalData.skills &&
+        companyAdditionalData.skills.map((data, index) => <button className={styles.role} key={index} onClick={() => removeSkill(data)}>{data}</button>)
         }
         {skillInput && <TextInput
         refProp={textInputRef}
@@ -76,9 +76,9 @@ function ThirdStudentStep({setStep, studentAdditionalData, setStudentAdditionalD
 </button>}
       </div>
       <Arrow onClick={() => {setStep(1)}} back></Arrow>
-      <Arrow onClick={postAdditionalData}></Arrow>
+      <Arrow onClick={() => {setStep(3)}}></Arrow>
     </div>
   );
 }
 
-export default ThirdStudentStep;
+export default ThirdCompanyStep;
