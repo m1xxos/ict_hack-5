@@ -5,7 +5,7 @@ from fastapi_users import schemas
 
 
 class UserRead(schemas.BaseUser[PydanticObjectId]):
-    interests: str
+    interests: Any
     tag_list: list[str]
     name: str
     surname: str
